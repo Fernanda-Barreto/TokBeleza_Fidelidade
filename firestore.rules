@@ -1,0 +1,26 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // USERS - Permitir leitura para todos autenticados
+    match /users/{userId} {
+      // Leitura para qualquer usuário autenticado
+      allow read: if request.auth != null;
+      
+      // Criação apenas pelo próprio usuário
+      allow create: if request.auth != null && request.auth.uid == userId;
+      
+      // Atualização: próprio usuário OU qualquer usuário autenticado (para merchants)
+      allow update: if request.auth != null;
+      
+      allow delete: if false;
+    }
+
+    // RAFFLES - Permitir tudo para autenticados
+    match /raffles/{raffleId} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
+
+
