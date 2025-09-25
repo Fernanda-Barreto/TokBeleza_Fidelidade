@@ -96,3 +96,13 @@ firebase-debug.*.log
 # Logs
 logs
 *.log
+.env
+.env.*
+!.env.example
+serviceAccount*.json
+.firebase/
+firebase-debug.log
+*.keystore
+*.jks
+*.p12
+
