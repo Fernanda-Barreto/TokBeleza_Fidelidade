@@ -100,7 +100,7 @@ const LojistaHomeScreen = ({ onNavigate }) => {
       });
       const csv = header + rows.join('\n');
       const fileUri = FileSystem.cacheDirectory + `participantes_${raffleId}.csv`;
-      await FileSystem.writeAsStringAsync(fileUri, csv, { encoding: FileSystem.EncodingType.UTF8 });
+      await FileSystem.writeAsStringAsync(fileUri, csv);
       if (await Sharing.isAvailableAsync()) {
         await Sharing.shareAsync(fileUri, { mimeType: 'text/csv', dialogTitle: 'Baixar Planilha de Participantes' });
       } else {
