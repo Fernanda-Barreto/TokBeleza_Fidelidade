@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { useAuth } from '../hooks/useAuth';
 import { db } from '../../firebaseConfig';
 import { listenRafflesByCreator, createRaffle, updateRaffleStatus, deleteRaffle } from '../utils/raffles';
-import * as FileSystem from 'expo-file-system';
+import * as FileSystem from 'expo-file-system/legacy';
 import * as Sharing from 'expo-sharing';
 import { collection, getDocs } from 'firebase/firestore';
 import Input from '../components/common/Input';
