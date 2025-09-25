@@ -87,18 +87,51 @@ npm start
 
 ```
 FidelidadeVirtualJS/
-├── App.js                 # Componente principal
+├── App.js                 # Componente principal do app
+├── index.js               # Ponto de entrada (registro do app)
+├── app.json               # Configurações do app/Expo
 ├── firebaseConfig.js      # Configuração do Firebase
-├── package.json           # Dependências do projeto
-├── src/
-│   ├── screens/           # Telas do aplicativo
-│   │   ├── LoginScreen.js
-│   │   ├── CadastroScreen.js
-│   │   └── HomeScreen.js
-│   └── style/             # Estilos
-│       ├── LoginScreenStyle.js
-│       └── HomeScreenStyle.js
-└── assets/                # Imagens e ícones
+├── firestore.rules        # Regras do Firestore
+├── package.json           # Dependências e scripts
+├── package-lock.json      # Lockfile
+├── README.md              # Documentação
+├── assets/                # Imagens e ícones
+│   ├── adaptive-icon.png
+│   ├── box-gift.png
+│   ├── box-sorteios.png
+│   ├── favicon.png
+│   ├── icon.png
+│   └── splash-icon.png
+└── src/
+    ├── components/        # Componentes reutilizáveis
+    │   └── common/        # UI compartilhada
+    │       ├── Button.js
+    │       ├── InfoRowCard.js
+    │       ├── Input.js
+    │       ├── QRCodeDisplay.js
+    │       └── SideMenu.js
+    ├── contexts/          # Context API e providers
+    │   └── AuthContext.js
+    ├── hooks/             # Hooks personalizados
+    │   ├── useAuth.js
+    │   └── useForm.js
+    ├── screens/           # Telas do aplicativo
+    │   ├── CadastroScreen.js
+    │   ├── HomeScreen.js
+    │   ├── LoginScreen.js
+    │   ├── LojistaHomeScreen.js
+    │   ├── LojistaScreen.js
+    │   └── SettingsScreen.js
+    ├── style/             # Estilos por tela
+    │   ├── CadastroScreenStyle.js
+    │   ├── HomeScreenStyle.js
+    │   ├── LoginScreenStyle.js
+    │   ├── LojistaHomeScreenStyle.js
+    │   └── LojistaScreenStyle.js
+    └── utils/             # Utilitários e constantes
+        ├── constants.js
+        ├── raffles.js
+        └── validation.js
 ```
 
 ## 🔐 Configuração do Firestore
