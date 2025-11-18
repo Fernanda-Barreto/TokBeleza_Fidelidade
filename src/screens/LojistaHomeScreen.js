@@ -6,7 +6,7 @@ import { Feather } from '@expo/vector-icons';
 import { useAuth } from '../hooks/useAuth';
 import { db } from '../../firebaseConfig';
 import { listenRafflesByCreator, createRaffle, updateRaffleStatus, deleteRaffle } from '../utils/raffles';
-import * as FileSystem from 'expo-file-system';
+  import { File, Paths } from 'expo-file-system';
 import * as Sharing from 'expo-sharing';
 import { collection, getDocs } from 'firebase/firestore';
 import Input from '../components/common/Input';
@@ -99,12 +99,17 @@ const LojistaHomeScreen = ({ onNavigate }) => {
         return [safe(p.name), safe(p.email), safe(p.phone), p.participacoes].join(',');
       });
       const csv = header + rows.join('\n');
-      const fileUri = FileSystem.cacheDirectory + `participantes_${raffleId}.csv`;
-      await FileSystem.writeAsStringAsync(fileUri, csv, { encoding: FileSystem.EncodingType.UTF8 });
+      
+      // Usa a nova API File/Paths
+      const fileName = `participantes_${raffleId}.csv`;
+      const file = new File(Paths.cache, fileName);
+      file.create();
+      file.write(csv);
+      
       if (await Sharing.isAvailableAsync()) {
-        await Sharing.shareAsync(fileUri, { mimeType: 'text/csv', dialogTitle: 'Baixar Planilha de Participantes' });
+        await Sharing.shareAsync(file.uri, { mimeType: 'text/csv', dialogTitle: 'Baixar Planilha de Participantes' });
       } else {
-        Alert.alert('Arquivo gerado', `Salvo em: ${fileUri}`);
+        Alert.alert('Arquivo gerado', `Salvo em: ${file.uri}`);
       }
     } catch (e) {
       Alert.alert('Erro', e?.message || 'Falha ao gerar a planilha.');
